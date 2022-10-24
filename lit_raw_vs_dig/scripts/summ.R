@@ -10,5 +10,5 @@ summ <- aggregate2(dl, x = 'value', by = c('digestate', 'slurry.major', 'variabl
                    FUN = list(mean = mean, sd = sd, n = length))
 summ <- rounddf(summ, 3, fun = signif)
 
-#write.xlsx(summ, file = '../lit_output/lit_summ.xlsx')
+#write.xlsx(summ, file = '../output/lit_summ.xlsx')
 

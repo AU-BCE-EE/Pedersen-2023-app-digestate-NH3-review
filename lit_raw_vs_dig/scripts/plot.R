@@ -29,5 +29,5 @@ p3 <- ggplot(dw, aes(emis.perc.ref, emis.perc.dig, shape = slurry.major.ref, col
   annotate("text", x = 62, y = 62, label = "C")
 
 pp <- grid.arrange(p1, p2, p3, nrow = 1)
-ggsave2x('../lit_plots/EF_DM_pH', plot = pp, height = 4, width = 8)
+ggsave2x('../plots/EF_DM_pH', plot = pp, height = 4, width = 8)
 
