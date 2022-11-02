@@ -31,3 +31,15 @@ p3 <- ggplot(dw, aes(emis.perc.ref, emis.perc.dig, shape = slurry.major.ref, col
 pp <- grid.arrange(p1, p2, p3, nrow = 1)
 ggsave2x('../plots/EF_DM_pH', plot = pp, height = 4, width = 8)
 
+
+
+ggplot(dw, aes(emis.perc.ref, emis.perc.dig, shape = slurry.major.ref, color = slurry.major.ref)) +
+  geom_point() +
+  geom_abline(intercept = 0, slope = 1, linetype = 2) +
+  scale_color_brewer(palette = "Set1") +
+  theme_bw() +
+  #  theme(legend.position = 'top') + 
+  labs(x = 'Raw EF (% of TAN)', y = 'Digestate EF (% of TAN)', shape = '', colour = '', lty = '') +
+  geom_abline(intercept = 0, slope = 0, linetype = 2) + 
+  xlim(8, 62) + ylim(8, 62)
+ggsave2x('../plots/dig_effect', height = 4, width = 4)
