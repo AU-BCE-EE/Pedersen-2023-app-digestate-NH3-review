@@ -7,5 +7,5 @@ dl <- dat[! is.na(dat$co.dig), ]
 
 # And then summarize
 summ <- aggregate2(dl, x = c('DM', 'pH', 'TAN', 'totN'), by = c('slurry.major'), 
-                   FUN = list(mean = mean, sd = sd, n = length), na.rm = TRUE)
+                   FUN = list(mean = mean, sd = sd, n = n), na.rm = TRUE)
 summ <- rounddf(summ, 3, fun = signif)
