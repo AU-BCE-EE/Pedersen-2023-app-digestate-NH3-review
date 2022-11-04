@@ -38,8 +38,8 @@ ggplot(dw, aes(emis.perc.ref, emis.perc.dig, shape = slurry.major.ref, color = s
   geom_abline(intercept = 0, slope = 1, linetype = 2) +
   scale_color_brewer(palette = "Set1") +
   theme_bw() +
-  #  theme(legend.position = 'top') + 
+  theme(legend.position = 'top') + 
   labs(x = 'Raw EF (% of TAN)', y = 'Digestate EF (% of TAN)', shape = '', colour = '', lty = '') +
   geom_abline(intercept = 0, slope = 0, linetype = 2) + 
   xlim(8, 62) + ylim(8, 62)
-ggsave2x('../plots/dig_effect', height = 4, width = 4)
+ggsave2x('../plots/dig_effect', height = 3.5, width = 3.5)
