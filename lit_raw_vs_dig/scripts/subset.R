@@ -12,7 +12,7 @@ dl <- dat[dat$relDiff == 'yes', ]
 dref <- dl[dl$relDiff.frac == 'reference', ]
 ddig <- dl[dl$relDiff.frac == 'digestate', ]
 
-dw <- merge(dref, ddig, by = c('source', 'relDiff.set'), suffixes = c('.ref', '.dig'), all = TRUE)
+dw <- merge(dref, ddig, by = c('source', 'source.ID', 'relDiff.set'), suffixes = c('.ref', '.dig'), all = TRUE)
 dw$emis.perc.dig <- as.numeric(dw$emis.perc.dig)
 dw$emis.perc.ref <- as.numeric(dw$emis.perc.ref)
 dw[dw == 'cattle'] <- 'Cattle'
