@@ -1,0 +1,125 @@
+---
+title: 'Stats to parse out DM and pH effects'
+output: pdf_document
+author: Sasha D. Hafner
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+---
+
+# Plots
+
+```{r}
+dat$DMgrp <- cut(dat$DM, 4)
+dat$pHgrp <- cut(dat$pH, 4)
+dd <- subset(dat, !is.na(pH) & !is.na(DM))
+```
+
+```{r}
+ggplot(dd, aes(pH, emis.perc, colour = source)) +
+  geom_point() +
+  geom_line() +
+  facet_wrap(~ DMgrp, ncol = 4)
+```
+
+```{r}
+ggplot(dd, aes(DM, emis.perc, colour = source)) +
+  geom_point() +
+  geom_line() +
+  facet_wrap(~ pHgrp, ncol = 4)
+```
+
+Not pretty but there do seem to be correlations for both DM and pH.
+
+How did digestion change DM and pH?
+
+```{r}
+dd <- subset(dd, !is.na(relDiff.set))
+ggplot(dd, aes(DM, pH, colour = relDiff.frac, group = interaction(source, relDiff.set))) +
+  geom_line(colour = 'gray85') +
+  geom_point() +
+  theme_bw()
+```
+
+Generally increased pH and decreased DM, as expected in the absence of added high DM substrates.
+
+# Models
+
+Summary.
+
+```{r}
+dfsumm(dat[, c('source', 'app.meth', 'DM', 'pH', 'relDiff.frac', 'emis.perc')])
+```
+
+Overall digestion effect (not expecting much)
+
+```{r}
+m1 <- lm(emis.perc ~ source + app.meth + relDiff.frac, data = dat)
+summary.aov(m1)
+tail(coef(m1))
+```
+
+Nothing.
+
+Separate DM and pH effects.
+
+```{r}
+m2 <- lm(emis.perc ~ pH + DM + relDiff.frac + source + app.meth, data = dat)
+summary.aov(m2)
+drop1(m2, test = 'F')
+```
+
+```{r}
+m3 <- lm(emis.perc ~ pH + DM + source + app.meth, data = dat)
+summary.aov(m3)
+drop1(m3, test = 'F')
+cc <- coef(m3)[1:3]
+cc
+confint(m3)[1:3, ]
+cc['pH'] / cc['DM']
+```
+
+m3 is where it gets interesting.
+Clear positive effects of DM and pH, although the pH effect seems small (+4% emission (frac. of TAN) per unit pH change).
+Effect of pH is about 2x DM effect (1 unit pH change : 1% DM change).
+
+```{r}
+plot(m3, ask = FALSE)
+```
+
+We might look at relative effect.
+
+```{r}
+m4 <- lm(log10(emis.perc) ~ pH + DM + source + app.meth, data = dat)
+summary.aov(m4)
+cc <- 100 * (10^coef(m4)[1:3] - 1)
+cc
+100 * (10^confint(m4)[1:3, ] - 1)
+cc['pH'] / cc['DM']
+```
+
+38% increase in emission with a 1 unit increase in pH, seems plausible.
+Effect of pH here 3x DM effect. 
+Seems more plausible.
+
+```{r}
+plot(m4, ask = FALSE)
+```
+
+# Predictions
+
+Might be interesting to see how predictions here stack up against current DK EFs (based on ALFAM2).
+
+```{r}
+dat$si <- factor(as.integer(factor(dat$source)))
+m5 <- lm(log10(emis.perc) ~ pH + DM + si + app.meth, data = dat)
+coef(m5)
+preddat <- data.frame(scenario = c('ref', 'dig', 'dig+'), si = factor(19), app.meth = 'trailing hose',
+                      DM = c(6.5, 5.1, 6.5), pH = c(7, 7.9, 7.9))
+preddat$emis <- 10^predict(m5, newdata = preddat)
+```
+
+```{r}
+knitr::kable(preddat)
+```
+
+
+
