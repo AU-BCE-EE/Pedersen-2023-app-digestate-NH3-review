@@ -10,5 +10,6 @@ summ <- aggregate2(dl, x = 'value', by = c('relDiff.frac', 'slurry.major', 'vari
                    FUN = list(mean = mean, sd = sd, n = length))
 summ <- rounddf(summ, 3, fun = signif)
 
-#write.xlsx(summ, file = '../output/lit_summ.xlsx')
+# Counts
+counts <- as.matrix(table(dl$source, dl$slurry.major))
 

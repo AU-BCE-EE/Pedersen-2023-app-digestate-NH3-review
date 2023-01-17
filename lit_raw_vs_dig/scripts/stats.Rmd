@@ -104,17 +104,54 @@ Seems more plausible.
 plot(m4, ask = FALSE)
 ```
 
+# Mixed-effects model
+As Johanna pointed out, `source` is really a random effect.
+
+```{r}
+dfsumm(dd[, c('pH', 'DM', 'app.meth', 'source')])
+dsub <- subset(dat, !is.na(pH) & !is.na(DM) & !is.na(app.meth))
+m5 <- lmer(log10(emis.perc) ~ pH + DM + app.meth + (1|source), data = dsub)
+```
+
+```{r}
+summary(m5)
+ccm <- 100 * (10^fixef(m5)[1:3] - 1)
+ccm
+100 * (10^confint(m5)[4:5, ] - 1)
+ccm['pH'] / ccm['DM']
+```
+
+Large *t* statistics and similar coefficients as classical linear model `m4`.
+Compare:
+
+```{r}
+cc
+ccm
+```
+
+But, let's try likelihood ratio test (I think that's what `anova()` is doing here).
+
+```{r}
+m0 <- lmer(log10(emis.perc) ~ app.meth + (1|source), data = dsub)
+m0pH <- lmer(log10(emis.perc) ~ DM + app.meth + (1|source), data = dsub)
+m0DM <- lmer(log10(emis.perc) ~ pH + app.meth + (1|source), data = dsub)
+anova(m5, m0pH)
+anova(m5, m0DM)
+anova(m5, m0)
+```
+
 # Predictions
 
 Might be interesting to see how predictions here stack up against current DK EFs (based on ALFAM2).
 
 ```{r}
 dat$si <- factor(as.integer(factor(dat$source)))
-m5 <- lm(log10(emis.perc) ~ pH + DM + si + app.meth, data = dat)
-coef(m5)
-preddat <- data.frame(scenario = c('ref', 'dig', 'dig+'), si = factor(19), app.meth = 'trailing hose',
+m6 <- lm(log10(emis.perc) ~ pH + DM + si + app.meth, data = dat)
+coef(m6)
+preddat <- data.frame(scenario = c('ref', 'dig', 'dig+'), si = factor(19), 
+                      app.meth = 'trailing hose',
                       DM = c(6.5, 5.1, 6.5), pH = c(7, 7.9, 7.9))
-preddat$emis <- 10^predict(m5, newdata = preddat)
+preddat$emis <- 10^predict(m6, newdata = preddat)
 ```
 
 ```{r}
