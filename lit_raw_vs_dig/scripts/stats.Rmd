@@ -140,6 +140,20 @@ anova(m5, m0DM)
 anova(m5, m0)
 ```
 
+Look at raw and digestate separately.
+
+```{r}
+m4r <- lm(log10(emis.perc) ~ pH + DM + app.meth, data = dsub, subset = relDiff.frac == 'reference')
+summary(m4r)
+drop1(m4r, test = 'F')
+```
+
+```{r}
+m4d <- lm(log10(emis.perc) ~ pH + DM + app.meth, data = dsub, subset = relDiff.frac == 'digestate')
+summary(m4d)
+drop1(m4d, test = 'F')
+```
+
 # Predictions
 
 Might be interesting to see how predictions here stack up against current DK EFs (based on ALFAM2).
@@ -157,6 +171,37 @@ preddat$emis <- 10^predict(m6, newdata = preddat)
 ```{r}
 knitr::kable(preddat)
 ```
+
+# Different approach
+
+```{r}
+ddw <- subset(dw, !is.na(emis.perc.ref + emis.perc.dig + DM.ref + DM.dig + pH.ref + pH.dig))
+ddw$demis <- ddw$emis.perc.dig - ddw$emis.perc.ref
+ddw$dpH <- ddw$pH.dig - ddw$pH.ref
+ddw$dDM <- ddw$DM.dig - ddw$DM.ref
+```
+
+```{r}
+m7 <- lm(log10(emis.perc.dig) ~ log10(emis.perc.ref) + dpH + dDM, data = ddw)
+summary(m7)
+```
+
+```{r}
+m8 <- lm(demis ~ dpH + dDM, data = ddw)
+summary(m8)
+```
+
+Wow.
+Nothing going on.
+
+```{r}
+hist(ddw$dDM, breaks = 20)
+```
+
+```{r}
+hist(ddw$dpH, breaks = 20)
+```
+
 
 
 
