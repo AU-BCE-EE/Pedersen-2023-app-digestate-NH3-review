@@ -45,14 +45,15 @@ ggplot(dw, aes(emis.perc.ref, emis.perc.dig, shape = slurry.major.ref, color = s
 ggsave2x('../plots/dig_effect', height = 3.5, width = 3.5)
 
 
-ggplot(dw, aes(emis.perc.ref, emis.perc.dig)) +
-  geom_text(aes(label = source.ID), size = 2) +
+ggplot(dw, aes(emis.perc.ref, emis.perc.dig, colour = slurry.major.ref)) +
+  geom_abline(intercept = 0, slope = 0, linetype = 2) + 
+  geom_point(shape = 1, size = 6) +
+  geom_text(aes(label = source.ID), size = 3, show.legend = FALSE) +
   geom_abline(intercept = 0, slope = 1, linetype = 2) +
   scale_color_brewer(palette = "Set1") +
   theme_bw() +
   theme(legend.position = 'top') + 
   labs(x = 'Raw EF (% of TAN)', y = 'Digestate EF (% of TAN)', shape = '', colour = '', lty = '') +
-  geom_abline(intercept = 0, slope = 0, linetype = 2) + 
   xlim(8, 62) + ylim(8, 62)
-ggsave2x('../plots/dig_effectA', height = 3.5, width = 5.5)
+ggsave2x('../plots/dig_effectA', height = 3.8, width = 3.5)
 
