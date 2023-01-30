@@ -202,6 +202,10 @@ hist(ddw$dDM, breaks = 20)
 hist(ddw$dpH, breaks = 20)
 ```
 
+Include interaction.
 
-
+```{r}
+m9 <- lm(log10(emis.perc.dig) ~ log10(emis.perc.ref) + dpH*dDM, data = ddw)
+summary(m9)
+```
 
