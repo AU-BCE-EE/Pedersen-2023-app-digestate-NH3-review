@@ -29,7 +29,7 @@ loaded via a namespace (and not attached):
 [17] parallel_4.2.1   xfun_0.30        fastmap_1.1.0    stringr_1.4.0   
 [21] knitr_1.39       withr_2.5.0      dplyr_1.0.9      generics_0.1.2  
 [25] vctrs_0.5.1      grid_4.2.1       tidyselect_1.1.2 glue_1.6.2      
-[29] R6_2.5.1         fansi_1.0.3      farver_2.1.0     purrr_0.3.4     
-[33] magrittr_2.0.3   scales_1.2.0     ellipsis_0.3.2   htmltools_0.5.2 
-[37] assertthat_0.2.1 colorspace_2.0-3 labeling_0.4.2   tinytex_0.38    
-[41] utf8_1.2.2       stringi_1.7.6    munsell_0.5.0    crayon_1.5.1    
+[29] R6_2.5.1         fansi_1.0.3      purrr_0.3.4      magrittr_2.0.3  
+[33] scales_1.2.0     ellipsis_0.3.2   htmltools_0.5.2  assertthat_0.2.1
+[37] colorspace_2.0-3 labeling_0.4.2   tinytex_0.38     utf8_1.2.2      
+[41] stringi_1.7.6    munsell_0.5.0    crayon_1.5.1    
