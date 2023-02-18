@@ -9,6 +9,7 @@ source('load.R')
 source('summ.R')
 source('export.R')
 source('subset.R')
-render('stats.Rmd', output_dir = '../stats')
+render('stats_simple.Rmd', output_dir = '../stats')
+render('stats_mods.Rmd', output_dir = '../stats')
 source('plot.R')
 

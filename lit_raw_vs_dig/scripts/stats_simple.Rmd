@@ -1,0 +1,72 @@
+---
+title: 'Effect of digestion on composition and more'
+output: pdf_document
+author: Sasha D. Hafner
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+---
+
+# Vars 
+```{r}
+dw$dpH <- dw$pH.dig - dw$pH.ref
+```
+
+# Plots
+```{r}
+ggplot(dat, aes(source, pH, colour = relDiff.frac)) +
+  geom_point() +
+  theme(legend.position = 'top', axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
+
+ggplot(dw, aes(pH.ref, pH.dig)) +
+  geom_point()
+
+ggplot(dw, aes(pH.ref, dpH)) +
+  geom_point()
+```
+
+# Stats
+```{r}
+m1 <- lm(pH.dig ~ pH.ref, data = dw)
+summary(m1)
+```
+
+Try robust regression.
+
+```{r}
+m2 <- MASS::rlm(pH.dig ~ pH.ref, data = dw)
+summary(m2)
+```
+
+Digestate pH does seem correlated with raw pH but only with robust regression.
+Issue seems to decrease in change in pH at higher raw pH.
+
+```{r}
+t.test(dw$dpH)
+```
+
+Clearly pH does increase, according to a one-sample t-test.
+
+But look at change in pH:
+
+```{r}
+m3 <- lm(dpH ~ pH.ref, data = dw)
+summary(m3)
+```
+
+```{r}
+m4 <- MASS::rlm(dpH ~ pH.ref, data = dw)
+summary(m4)
+```
+
+Interestingly, the change in pH is negatively correlated with initial pH.
+
+Change DM change.
+
+```{r}
+dw$dDM <- dw$DM.dig - dw$DM.ref
+t.test(dw$dDM)
+```
+
+And DM clearly decreases.
+
+
+
