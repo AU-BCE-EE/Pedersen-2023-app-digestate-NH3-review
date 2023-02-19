@@ -16,45 +16,70 @@ ggplot(dat, aes(source, pH, colour = relDiff.frac)) +
   geom_point() +
   theme(legend.position = 'top', axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
 
-ggplot(dw, aes(pH.ref, pH.dig)) +
+ggplot(dw, aes(pH.ref, pH.dig, colour = slurry.major.ref)) +
   geom_point()
 
-ggplot(dw, aes(pH.ref, dpH)) +
+ggplot(dw, aes(pH.ref, dpH, colour = slurry.major.ref)) +
   geom_point()
 ```
 
 # Stats
 ```{r}
-m1 <- lm(pH.dig ~ pH.ref, data = dw)
+m1 <- lm(pH.dig ~ pH.ref + slurry.major.ref, data = dw)
 summary(m1)
 ```
 
+```{r}
+m2 <- lm(pH.dig ~ pH.ref, data = dw)
+summary(m2)
+```
 Try robust regression.
 
 ```{r}
-m2 <- MASS::rlm(pH.dig ~ pH.ref, data = dw)
-summary(m2)
+m3 <- MASS::rlm(pH.dig ~ pH.ref + slurry.major.ref, data = dw)
+summary(m3)
+```
+
+```{r}
+m4 <- MASS::rlm(pH.dig ~ pH.ref, data = dw)
+summary(m4)
 ```
 
 Digestate pH does seem correlated with raw pH but only with robust regression.
-Issue seems to decrease in change in pH at higher raw pH.
+Issue seems to be a decrease in change in pH at higher raw pH.
 
 ```{r}
 t.test(dw$dpH)
 ```
 
 Clearly pH does increase, according to a one-sample t-test.
+Compare among animal types.
+
+```{r}
+m5 <- lm(dpH ~ slurry.major.ref, data = dw)
+summary(m5)
+```
 
 But look at change in pH:
 
 ```{r}
-m3 <- lm(dpH ~ pH.ref, data = dw)
-summary(m3)
+m6 <- lm(dpH ~ pH.ref + slurry.major.ref, data = dw)
+summary(m6)
 ```
 
 ```{r}
-m4 <- MASS::rlm(dpH ~ pH.ref, data = dw)
-summary(m4)
+m7 <- lm(dpH ~ pH.ref, data = dw)
+summary(m7)
+```
+
+```{r}
+m8 <- MASS::rlm(dpH ~ pH.ref + slurry.major.ref, data = dw)
+summary(m8)
+```
+
+```{r}
+m9 <- MASS::rlm(dpH ~ pH.ref, data = dw)
+summary(m9)
 ```
 
 Interestingly, the change in pH is negatively correlated with initial pH.
