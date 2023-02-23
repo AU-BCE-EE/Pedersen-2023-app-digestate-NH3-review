@@ -85,7 +85,7 @@ ggplot(ddEF, aes(app.timing.int, EFp, colour = man.source)) +
                      labels= unique(dat$app.timing), limits = c(0.8, 6.1)) +
   ylim(0, 62) +
   theme(legend.position = 'top') + 
-  scale_color_brewer(palette = 'Dark2')
+  scale_color_manual(values = c("#1B9E77", "#D95F02", "#7570B3"))
 ggsave('../plots/emis_pred2_JP1.png', height = 4, width = 7)
 
 ggplot(dd[! dd$man.source == 'Digestate MAG', ], aes(app.timing.int, EFp, colour = man.source)) +
@@ -102,7 +102,7 @@ ggplot(dd[! dd$man.source == 'Digestate MAG', ], aes(app.timing.int, EFp, colour
                      labels= unique(dat$app.timing), limits = c(0.8, 6.1)) +
   ylim(0, 62) +
   theme(legend.position = 'top') + 
-  scale_color_brewer(palette = 'Dark2')
+  scale_color_manual(values = c("#1B9E77",  "#D95F02","#E7298A", "#7570B3"))
 ggsave('../plots/emis_pred2_JP2.png', height = 4, width = 7)
 
 ggplot(dd, aes(app.timing.int, EFp, colour = man.source)) +
@@ -119,5 +119,5 @@ ggplot(dd, aes(app.timing.int, EFp, colour = man.source)) +
                      labels= unique(dat$app.timing), limits = c(0.8, 6.1)) +
   ylim(0, 62) +
   theme(legend.position = 'top') + 
-  scale_color_brewer(palette = 'Dark2')
+  scale_color_manual(values = c("#1B9E77", "#D95F02","#E7298A", "#66A61E", "#7570B3"))
  ggsave('../plots/emis_pred2_JP3.png', height = 4, width = 7)
