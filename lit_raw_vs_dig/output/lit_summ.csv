@@ -2,18 +2,18 @@
 "digestate","cattle","DM",4.03,1.86,18
 "reference","cattle","DM",7.29,2.92,20
 "digestate","cattle and pig","DM",4.55,1.74,4
-"digestate","pig","DM",2.52,1.1,17
-"reference","pig","DM",3.68,1.93,15
+"digestate","pig","DM",2.47,1.17,15
+"reference","pig","DM",3.73,1.99,14
 "digestate","cattle","pH",7.83,0.584,12
 "reference","cattle","pH",7.33,0.261,14
 "digestate","cattle and pig","pH",8.16,0.0597,4
-"digestate","pig","pH",8.15,0.419,17
-"reference","pig","pH",7.67,0.397,15
+"digestate","pig","pH",8.09,0.413,15
+"reference","pig","pH",7.69,0.405,14
 "digestate","cattle","TAN",1.95,0.82,18
 "reference","cattle","TAN",1.82,0.721,20
 "digestate","cattle and pig","TAN",4.03,0.378,4
-"digestate","pig","TAN",3.38,0.886,17
-"reference","pig","TAN",3.38,1.02,15
+"digestate","pig","TAN",3.49,0.887,15
+"reference","pig","TAN",3.4,1.06,14
 "digestate","cattle","totN",3.52,0.947,11
 "reference","cattle","totN",4.28,0.974,13
 "digestate","cattle and pig","totN",5.42,0.568,4

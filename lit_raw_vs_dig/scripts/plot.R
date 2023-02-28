@@ -1,5 +1,7 @@
 # Create plot
 
+dd$relDiff.frac.nm <- factor(dd$relDiff.frac, levels = c('reference', 'digestate'), labels = c('Reference', 'Digestate'))
+
 p1 <- ggplot(dd, aes(DM, emis.perc, shape = relDiff.frac, colour = relDiff.frac)) +
   geom_line(aes(group = interaction(source, relDiff.set)), colour = 'gray75') +
   geom_point() +
@@ -57,13 +59,15 @@ ggplot(dw, aes(emis.perc.ref, emis.perc.dig, colour = slurry.major.ref)) +
   xlim(8, 62) + ylim(8, 62)
 ggsave2x('../plots/dig_effectA', height = 3.8, width = 3.5)
 
-ggplot(dd, aes(DM, pH, shape = relDiff.frac, colour = interaction(source, relDiff.set))) +
-  geom_line(aes(group = interaction(source, relDiff.set))) +
+ggplot(dd, aes(DM, pH, shape = relDiff.frac.nm, colour = interaction(source, relDiff.set))) +
+  geom_smooth(aes(group = interaction(source, relDiff.set)), method = lm, se = FALSE, linewidth = 0.5) +
   scale_shape_manual(values = c(1, 17)) +
   geom_point(size = 3) +
-  labs(x = 'DM (%)', y = 'pH') +
-  theme(legend.position = 'none')
-ggsave2x('../plots/DM_pH_effects', height = 4, width = 4)
+  labs(x = 'DM (%)', y = 'pH', shape = '') +
+  theme_bw() +
+  theme(legend.position = 'top') +
+  guides(colour = 'none')
+ggsave2x('../plots/DM_pH_effects', height = 3.5, width = 3.2)
 
 ggplot(dw, aes((DM.dig - DM.ref), (pH.dig - pH.ref), colour = interaction(source, relDiff.set))) +
   geom_hline(yintercept = 0) +
