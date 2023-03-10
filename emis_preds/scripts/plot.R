@@ -38,7 +38,7 @@ ggplot(dd, aes(app.timing.int, EFp, colour = man.source)) +
   geom_line(data = ulc, alpha = 0.7) +
   geom_line() +
   facet_wrap(~ raw.or.dig) +
-  labs(x = 'Application period', y = 'Emission (% of TAN)',
+  labs(x = 'Application period', y = 'EF (% of TAN)',
        shape = '', colour = '') + 
   scale_shape_manual(values = c(19, 24, 6, 20, 1, 3, 7, 2, 4, 8)) +
   scale_x_continuous(breaks = unique(as.integer(dat$app.timing)), 
