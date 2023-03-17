@@ -10,6 +10,6 @@ ggplot(dd, aes(emis.perc.ref, emis.perc.treat, shape = slurry.major.ref, color =
   theme(legend.position = 'top') +
   labs(x = 'Digestate EF (% of TAN)', y = 'Treated digestate EF (% of TAN)', shape = '', colour = '', lty = '') +
   xlim(0, 55) + ylim(0, 55)
-ggsave2x('../plots/treat_effect', height = 3, width = 6)
+ggsave2x('../plots/treat_effect', height = 4, width = 6)
 
 
