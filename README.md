@@ -8,7 +8,7 @@ Johanna Pedersen. Contact information here: https://pure.au.dk/portal/en/jp@bce.
 See 'scripts' for R scripts. 'main.R' calls the other to do the complete dataload, subsetting, calculations, subsettings, plotting, saving of data (in 'output' subdirectory) and plots (in 'plots' subdirectory) etc.
 
 # Directory structure 
-## 'dig_prop_data'
+## `dig_prop_data`
 Digestate properties (DM, pH, TAN) of new Danish digestate dataset in 'data' subdirectory. Calculation of average values and confidence intervals. 
 
 ## emis_preds
