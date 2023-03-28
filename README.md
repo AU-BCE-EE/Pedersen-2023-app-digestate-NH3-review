@@ -33,4 +33,13 @@ Effect of digestestion on NH3 emisisons after field application.
 This section give the source of tables, figures, etc. in the paper. 
 | Paper component |  Repo source                             |  Repo scripts             |
 |-----------------|-----------------                         |---------------            |
-|   Table 2       |                         |  |
+| Counts in section 2.2.1 |                                  | lit_data/script/count.R    |
+|   Table 2       |  lit_data/output/lit_summ.xlsx           | lit_data/script/summ      |
+| pH and DM canges in 2.2.2 | lit_raw_vs_dig/stats/stats_simple.pdf  |  lit_raw_vs_dig/main.R   |
+| Table 3  | lit_raw_vs_dig/output/lit_summ.xlsx    |  lit_raw_vs_dig/scripts/export.R     |
+| Figure 1  | lit_raw_vs_dig/plots/dig_effectA.pdf    |  lit_raw_vs_dig/scripts/plot.R     |
+| Table 4  |  lit_raw_vs_dig/stats/stats_mods.pdf   |    lit_raw_vs_dig/main.R   |
+| Figure 2  |  lit_raw_vs_dig/plots/DM_pH_effects.pdf   |    lit_raw_vs_dig/scripts/plot.R   |
+| Figure 3  |  lit_dig_treat/plots/treat_effect.pdf   |  lit_dig_treat/scripts/plot.R     |
+| Table 5, Romio et al., in preparation  |  dig_prop_data/data/digestate_comp.xlsx   |       |
+| Figure 4  |   emis_preds/plots/emis_pred  |  emis_preds/scripts/plot.R     |
