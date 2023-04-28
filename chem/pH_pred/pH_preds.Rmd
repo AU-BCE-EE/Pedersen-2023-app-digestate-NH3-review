@@ -1,0 +1,139 @@
+---
+title: 'Predictions of pH change due to anaerobic digestion'
+output: pdf_document
+author: Sasha D. Hafner
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+---
+
+```{r}
+source('NH3_mods.R')
+```
+
+Use eqSpec to calculate equilibrium speciation.
+
+# 1. Raw pig slurry
+Define composition.
+```{r}
+totp1 <- c(H. = 0.0, NH3 = 0.208, H2CO3 = 0.112, K. = 0.0, Na. = 0.0, Cl. = 0.0, HAc = 0.21)
+```
+
+Calculate pH.
+```{r}
+eqp1 <- eqSpec(tot = totp1, temp.c = 18, of = 'all')
+-eqp1$l.a[1]
+```
+
+pH is 5.6, much lower than obs.
+Adjust with KOH.
+
+```{r}
+eqp2 <- eqSpec(tot = totp1, temp.c = 18, pH = 6.87, adjpH = 'KOH', of = 'all')
+totp2 <- eqp2$tot
+totp2
+```
+
+That's a lot of KOH.
+
+Check CO2 partial pressure for fun.
+
+```{r}
+eqp2$p.CO2
+```
+
+Try reducing VFA instead.
+
+```{r}
+eqp3 <- eqSpec(tot = totp1, temp.c = 18, pH = 6.87, adjpH = 'HAc', of = 'all')
+totp3 <- eqp3$tot
+totp3
+```
+
+That's plausible.
+
+# 2. Raw cattle slurry
+Define composition.
+```{r}
+totc1 <- c(H. = 0.0, NH3 = 0.149, H2CO3 = 0.129, K. = 0.0, Na. = 0.0, Cl. = 0.0, HAc = 0.193)
+```
+
+Calculate pH.
+```{r}
+eqc1 <- eqSpec(tot = totc1, temp.c = 18, of = 'all')
+-eqc1$l.a[1]
+```
+
+pH is 5.1, even lower than obs was for pig.
+Adjust with KOH.
+
+```{r}
+eqc2 <- eqSpec(tot = totc1, temp.c = 18, pH = 6.82, adjpH = 'KOH', of = 'all')
+totc2 <- eqc2$tot
+totc2
+```
+
+That's a ton of KOH.
+Try reducing VFA instead.
+
+```{r}
+eqc3 <- eqSpec(tot = totc1, temp.c = 18, pH = 6.82, adjpH = 'HAc', of = 'all')
+totc3 <- eqc3$tot
+totc3
+```
+
+That's plausible.
+
+# 3. Digestate
+Define composition.
+1/10th as much TIC.
+```{r}
+totd1 <- c(H. = 0.0, NH3 = 0.297, H2CO3 = 0.191, K. = 0.0, Na. = 0.0, Cl. = 0.0, HAc = 0.019)
+```
+
+Calculate pH.
+```{r}
+eqd1 <- eqSpec(tot = totd1, temp.c = 18, of = 'all')
+-eqd1$l.a[1]
+```
+
+pH 9.1.
+Clearly these differences in composition are *more than* enough to explain the differences in pH.
+
+# 4. Removing VFA from raw slurry
+What effect does removing VFA have?
+First pig.
+
+```{r}
+totp4 <- totp3
+totp4['HAc'] <- 0
+totp4
+```
+
+```{r}
+eqr1 <- eqSpec(tot = totp4, temp.c = 18, of = 'all')
+-eqr1$l.a[1]
+```
+
+Plenty.
+
+Then cattle.
+
+```{r}
+totc4 <- totc3
+totc4['HAc'] <- 0
+totc4
+```
+
+```{r}
+eqr2 <- eqSpec(tot = totc4, temp.c = 18, of = 'all')
+-eqr2$l.a[1]
+```
+
+Plenty of effect here too.
+
+# Conclusions
+1. We cannot completely explain observed pH values of raw slurry or digestate, but this isn't too worrying because we don't have complete information on composition.
+2. Observed differences in VFA and TAN in raw vs. digested slurry are more than enough to explain the observed pH difference.
+3. Simply removing raw slurry VFA is enough to explain the observed pH differences.
+
+
+
