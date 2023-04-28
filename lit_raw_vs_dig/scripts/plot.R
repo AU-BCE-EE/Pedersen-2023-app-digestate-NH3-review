@@ -1,6 +1,6 @@
 # Create plot
 
-dd$relDiff.frac.nm <- factor(dd$relDiff.frac, levels = c('reference', 'digestate'), labels = c('Reference', 'Digestate'))
+dd$relDiff.frac.nm <- factor(dd$relDiff.frac, levels = c('reference', 'digestate'), labels = c('Raw', 'Digestate'))
 
 p1 <- ggplot(dd, aes(DM, emis.perc, shape = relDiff.frac, colour = relDiff.frac)) +
   geom_line(aes(group = interaction(source, relDiff.set)), colour = 'gray75') +
