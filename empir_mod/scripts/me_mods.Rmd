@@ -1,0 +1,86 @@
+---
+title: 'Mixed-effects models'
+output: pdf_document
+author: Sasha D. Hafner
+date: "`r format(Sys.time(), '%d %B, %Y %H:%M')`"
+---
+
+# 1. Data prep
+
+```{r}
+pdat$inst <- factor(pdat$inst)
+pdat$inst.meas.tech <- interaction(pdat$institute, pdat$meas.tech)
+pdat$app.mthd <- factor(pdat$app.mthd)
+pdat$digestion <- grepl('[Dd]igest', paste(pdat$man.trt1, pdat$man.trt2))
+pdat$man.source.pig <- pdat$man.source == 'pig'
+```
+
+Get trailing hose (shoe?) subset
+
+```{r}
+pdat1 <- pdat[!is.na(e.24) &
+              !is.na(app.mthd) &
+              !is.na(man.dm) &
+              !is.na(man.source) & 
+              !is.na(air.temp.24) & 
+              !is.na(wind.2m.24) & 
+              !is.na(till) & 
+              !is.na(incorp) & 
+              !is.na(crop) & 
+              !acid &
+              incorp == 'none' &
+              e.24 > 0 & 
+              e.rel.24 < 1.0 &
+              e.rel.final < 1.05 &
+              e.rel.final > - 0.05 &
+              man.source != 'conc' &
+              man.dm <= 15 &
+              app.mthd != 'pi' &
+              app.mthd != 'bss' &
+              meas.tech2 %in% c('micro met') &
+              !inst %in% c(102, 107, 108) & # Exclude AUN, old Swiss (IUL/FAT), and JTI
+              pmid != 1526 &                # See rows 1703 and 1728 and others in MU data. Check with Marco
+              !grepl('Exclude data from analysis', notes.plot) , ]
+
+```
+
+
+```{r}
+#dat <- pdat[app.mthd == 'bsth' & meas.tech2 == 'micro met', ]
+#dat <- pdat[app.mthd == 'bsth', ]
+dat <- pdat1[app.mthd %in% c('bsth', 'ts') & e.rel.final < 1.1, ]
+```
+
+Subset without outliers.
+
+```{r}
+dat[, z := abs(scale(e.rel.final)), by = c('inst', 'app.mthd')]
+dato <- dat[z < 2, ]
+```
+
+```{r}
+table(dat[, acid])
+table(dat[, digestion])
+names(dat)
+```
+
+
+# Models
+
+```{r}
+m0 <- lmer(log10(e.rel.final) ~ man.source.pig + air.temp.24 + wind.2m.24 + man.dm + man.ph + (1|inst.meas.tech), data = dat)
+summary(m0)
+coef(m0)
+sort(unlist(coef(m0)$inst.meas.tech[, 1]))
+```
+
+```{r}
+efdat$inst.meas.tech <- factor('AU.bLS')
+efdat$air.temp.24 <- efdat$air.temp
+efdat$wind.2m.24 <- efdat$wind.2m
+efdat$man.source <- factor(efdat$man.source)
+efdat$EFp <- 100 * 10^predict(m0, newdata = efdat)
+pp <- predictInterval(m0, newdata = efdat)
+efdat$EFplwr <- 100 * 10^pp$lwr
+efdat$EFpupr <- 100 * 10^pp$upr
+```
