@@ -5,6 +5,13 @@ author: Sasha D. Hafner
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 ---
 
+# Overview
+This file uses a speciation model from <https://github.com/sashahafner/NH3-RTM> (v1.0, <https://github.com/sashahafner/NH3-RTM/releases/tag/v1.0>) to predict effects of differences in animal slurry chemical composition on pH.
+
+# Prep
+
+Load all functions.
+
 ```{r}
 source('NH3_mods.R')
 ```
