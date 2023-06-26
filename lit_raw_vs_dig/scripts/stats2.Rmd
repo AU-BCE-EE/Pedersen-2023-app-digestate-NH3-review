@@ -109,15 +109,34 @@ As Johanna pointed out, `source` is really a random effect.
 
 ```{r}
 dfsumm(dd[, c('pH', 'DM', 'app.meth', 'source')])
-dsub <- subset(dat, !is.na(pH) & !is.na(DM) & !is.na(app.meth))
-m5 <- lmer(log10(emis.perc) ~ pH + DM + app.meth + (1|source), data = dsub)
+dsub <- subset(dat, !is.na(emis.perc) & !is.na(app.meth))
+m5 <- lmer(log10(emis.perc) ~  relDiff.frac + app.meth + (1|source), data = dsub)
+```
+
+And there are multiple observations from each source.
+
+```{r}
+table(dsub$source)
 ```
 
 ```{r}
 summary(m5)
 ccm <- 100 * (10^fixef(m5) - 1)
 ccm
-100 * (10^confint(m5)[4:5, ] - 1)
+100 * (10^confint(m5) - 1)
+```
+
+```{r}
+dfsumm(dd[, c('pH', 'DM', 'app.meth', 'source')])
+dsub <- subset(dat, !is.na(pH) & !is.na(DM) & !is.na(app.meth))
+m6 <- lmer(log10(emis.perc) ~ pH + DM + app.meth + (1|source), data = dsub)
+```
+
+```{r}
+summary(m6)
+ccm <- 100 * (10^fixef(m6) - 1)
+ccm
+100 * (10^confint(m6)[4:5, ] - 1)
 ccm['pH'] / ccm['DM']
 ```
 
@@ -135,23 +154,9 @@ But, let's try likelihood ratio test (I think that's what `anova()` is doing her
 m0 <- lmer(log10(emis.perc) ~ app.meth + (1|source), data = dsub)
 m0pH <- lmer(log10(emis.perc) ~ DM + app.meth + (1|source), data = dsub)
 m0DM <- lmer(log10(emis.perc) ~ pH + app.meth + (1|source), data = dsub)
-anova(m5, m0pH)
-anova(m5, m0DM)
-anova(m5, m0)
-```
-
-Look at raw and digestate separately.
-
-```{r}
-m4r <- lm(log10(emis.perc) ~ pH + DM + app.meth, data = dsub, subset = relDiff.frac == 'reference')
-summary(m4r)
-drop1(m4r, test = 'F')
-```
-
-```{r}
-m4d <- lm(log10(emis.perc) ~ pH + DM + app.meth, data = dsub, subset = relDiff.frac == 'digestate')
-summary(m4d)
-drop1(m4d, test = 'F')
+anova(m6, m0pH)
+anova(m6, m0DM)
+anova(m6, m0)
 ```
 
 # Predictions
@@ -160,12 +165,14 @@ Might be interesting to see how predictions here stack up against current DK EFs
 
 ```{r}
 dat$si <- factor(as.integer(factor(dat$source)))
-m6 <- lm(log10(emis.perc) ~ pH + DM + si + app.meth, data = dat)
-coef(m6)
-preddat <- data.frame(scenario = c('ref', 'dig', 'dig+'), si = factor(19), 
+m7 <- lm(log10(emis.perc) ~ pH + DM + si + app.meth, data = dat)
+coef(m7)
+preddat <- data.frame(scenario = c('ref', 'dig', 'DM', 'pH'), si = factor(19), 
                       app.meth = 'trailing hose',
-                      DM = c(6.5, 5.1, 6.5), pH = c(7, 7.9, 7.9))
-preddat$emis <- 10^predict(m6, newdata = preddat)
+                      DM = c(6.5, 5.1, 5.1, 6.5), pH = c(7, 7.9, 7, 7.9))
+preddat$emis <- 10^predict(m7, newdata = preddat)
+preddat$rcDM <- 100 * ((preddat$emis - preddat$emis[1]) /  preddat$emis[1]) / (preddat$DM - preddat$DM[1])
+preddat$rcpH <- 100 * ((preddat$emis - preddat$emis[1]) /  preddat$emis[1]) / (preddat$pH - preddat$pH[1])
 ```
 
 ```{r}
@@ -182,13 +189,13 @@ ddw$dDM <- ddw$DM.dig - ddw$DM.ref
 ```
 
 ```{r}
-m7 <- lm(log10(emis.perc.dig) ~ log10(emis.perc.ref) + dpH + dDM, data = ddw)
-summary(m7)
+m8 <- lm(log10(emis.perc.dig) ~ log10(emis.perc.ref) + dpH + dDM, data = ddw)
+summary(m8)
 ```
 
 ```{r}
-m8 <- lm(demis ~ dpH + dDM, data = ddw)
-summary(m8)
+m9 <- lm(demis ~ dpH + dDM, data = ddw)
+summary(m9)
 ```
 
 Wow.
@@ -205,7 +212,15 @@ hist(ddw$dpH, breaks = 20)
 Include interaction.
 
 ```{r}
-m9 <- lm(log10(emis.perc.dig) ~ log10(emis.perc.ref) + dpH*dDM, data = ddw)
-summary(m9)
+m10 <- lm(log10(emis.perc.dig) ~ log10(emis.perc.ref) + dpH*dDM, data = ddw)
+summary(m10)
+```
+
+Better to use mixed-effects model.
+
+```{r}
+m11 <- lmer(demis ~ dpH + dDM + (1|source), data = ddw)
+summary(m11)
+confint(m11)
 ```
 

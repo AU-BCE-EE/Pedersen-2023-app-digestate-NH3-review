@@ -1,0 +1,123 @@
+---
+title: 'Stats 1: Effect of digestion on composition and more'
+output: pdf_document
+author: Sasha D. Hafner
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+---
+
+# Vars 
+Difference in pH due to digestion.
+```{r}
+dw$dpH <- dw$pH.dig - dw$pH.ref
+dw$dDM <- dw$DM.dig - dw$DM.ref
+```
+
+```{r}
+table(dw$source)
+```
+
+# Plots
+```{r}
+ggplot(dat, aes(source, pH, colour = relDiff.frac)) +
+  geom_point() +
+  theme(legend.position = 'top', axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
+
+ggplot(dw, aes(pH.ref, pH.dig, colour = slurry.major.ref)) +
+  geom_point()
+
+ggplot(dw, aes(pH.ref, dpH, colour = slurry.major.ref)) +
+  geom_point()
+```
+
+# Stats
+```{r}
+m1 <- lm(pH.dig ~ pH.ref + slurry.major.ref, data = dw)
+summary(m1)
+```
+
+```{r}
+m2 <- lm(pH.dig ~ pH.ref, data = dw)
+summary(m2)
+```
+Try robust regression.
+
+```{r}
+m3 <- MASS::rlm(pH.dig ~ pH.ref + slurry.major.ref, data = dw)
+summary(m3)
+```
+
+```{r}
+m4 <- MASS::rlm(pH.dig ~ pH.ref, data = dw)
+summary(m4)
+```
+
+Digestate pH does seem correlated with raw pH but only with robust regression.
+Issue seems to be a decrease in change in pH at higher raw pH.
+So post digestion pH seems to be the same regardless of raw pH.
+Seems plausible.
+Say low raw pH is caused by a lot of VFAs, which then have no effect on digestate pH.
+
+Simpler question: how does digestion change pH and DM?
+
+```{r}
+t.test(dw$dpH)
+```
+
+Clearly pH does increase, according to a one-sample t-test.
+Mixed-effects model more appropriate.
+
+```{r}
+m5pH <- lmer(dpH ~ (1|source), data = dw)
+summary(m5pH)
+confint(m5pH)
+```
+
+Compare among animal types.
+
+```{r}
+m6pH <- lmer(dpH ~ slurry.major.ref +  (1|source), data = dw)
+summary(m6pH)
+```
+
+Not clearly smaller for pig.
+
+But we don't care about standard deviation estimates, so simpler to explain mean by study.
+
+```{r}
+dws <- aggregate2(dw, c('dpH', 'dDM'), by = 'source', FUN = list(mean = mean, n = function(x) sum(!is.na(x))))
+```
+
+```{r}
+t.test(dws$dpH.mean)
+```
+
+And repeat for DM:
+
+```{r}
+t.test(dw$dDM)
+```
+
+Clearly DM does increase, according to a one-sample t-test.
+Mixed-effects model more appropriate.
+
+```{r}
+m5DM <- lmer(dDM ~ (1|source), data = dw)
+summary(m5DM)
+confint(m5DM)
+```
+
+Compare among animal types.
+
+```{r}
+m6DM <- lmer(dDM ~ slurry.major.ref +  (1|source), data = dw)
+summary(m6DM)
+```
+
+Some evidence change is smaller for pigs.
+
+We don't care about standard deviation estimates, so simpler to explain mean by study.
+
+```{r}
+t.test(dws$dDM.mean)
+```
+
