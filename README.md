@@ -43,3 +43,8 @@ This section give the source of tables, figures, etc. in the paper.
 | Figure 3  |  lit_dig_treat/plots/treat_effect.pdf   |  lit_dig_treat/scripts/plot.R     |
 | Table 5, Romio et al., in preparation  |  dig_prop_data/data/digestate_comp.xlsx   |       |
 | Figure 4  |   emis_preds/plots/emis_pred  |  emis_preds/scripts/plot.R     |
+
+And the results given in the text:
+
+* "On average, the digestion process clearly increased pH, by about 0.5 units (mixed-effects model estimate of mean change from lmer(): 0.47, t-value of 3.0, 95% confidence interval 0.15, 0.78)." comes from `m5pH` object in `lit_raw_vs_dig/stats/stats1.pdf`. The t value comes from `summary()` (which seems to use `summary.merMod()`) and confidnece intrevals from `confint()`, both right below the `lmer()` call.
+* "Digestion also  decreased dry matter (mean change in dry matter -2.2%, t-value of 4.8, 95% confidence interval -1.3, -3.1% (% of fresh mass)) (Table 3)." comes from `m5DM` object just below in the same pdf document. 
