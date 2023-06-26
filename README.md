@@ -29,6 +29,9 @@ Effect on digestate treatment on NH3 emissions after field application.
 ## `lit_raw_vs_dig`
 Effect of digestestion on NH3 emisisons after field application. 
 
+## `pH_chem`
+Predictions of slurry pH for different chemical composition of slurry to assess possible effects of changes in VFA and TAN concentrations caused by anaerobic digestion.
+
 # Links to published paper 
 This section give the source of tables, figures, etc. in the paper. 
 | Paper component |  Repo source                             |  Repo scripts             |
