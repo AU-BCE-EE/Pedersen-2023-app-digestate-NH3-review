@@ -38,7 +38,7 @@ This section give the source of tables, figures, etc. in the paper.
 | pH and DM canges in 2.2.2 | lit_raw_vs_dig/stats/stats_simple.pdf  |  lit_raw_vs_dig/main.R   |
 | Table 3  | lit_raw_vs_dig/output/lit_summ.xlsx    |  lit_raw_vs_dig/scripts/export.R     |
 | Figure 1  | lit_raw_vs_dig/plots/dig_effectA.pdf    |  lit_raw_vs_dig/scripts/plot.R     |
-| Table 4  |  lit_raw_vs_dig/stats/stats_mods.pdf   |    lit_raw_vs_dig/main.R   |
+| Table 4  |  `m6` in lit_raw_vs_dig/stats/stats2.pdf   |    lit_raw_vs_dig/main.R   |
 | Figure 2  |  lit_raw_vs_dig/plots/DM_pH_effects.pdf   |    lit_raw_vs_dig/scripts/plot.R   |
 | Figure 3  |  lit_dig_treat/plots/treat_effect.pdf   |  lit_dig_treat/scripts/plot.R     |
 | Table 5, Romio et al., in preparation  |  dig_prop_data/data/digestate_comp.xlsx   |       |
@@ -47,4 +47,8 @@ This section give the source of tables, figures, etc. in the paper.
 And the results given in the text:
 
 * "On average, the digestion process clearly increased pH, by about 0.5 units (mixed-effects model estimate of mean change from lmer(): 0.47, t-value of 3.0, 95% confidence interval 0.15, 0.78)." comes from `m5pH` object in `lit_raw_vs_dig/stats/stats1.pdf`. The t value comes from `summary()` (which seems to use `summary.merMod()`) and confidnece intrevals from `confint()`, both right below the `lmer()` call.
-* "Digestion also  decreased dry matter (mean change in dry matter -2.2%, t-value of 4.8, 95% confidence interval -1.3, -3.1% (% of fresh mass)) (Table 3)." comes from `m5DM` object just below in the same pdf document. 
+* "Digestion also  decreased dry matter (mean change in dry matter -2.2%, t-value of 4.8, 95% confidence interval -1.3, -3.1% (% of fresh mass)) (Table 3)." comes from `m5DM` object just below in the same pdf document.
+* Digestion effect on emission: "and the average effect from all observations was a small reduction below 1% of reference emission (mixed-effects model estimates: -0.7%, t-value 0.07, 95% confidence interval -19, 22% of reference emission)." comes from `m5` object in `lit_raw_vs_dig/stats/stats2.pdf`. See `summary(m5)` for intercept term and t-value, and `100 * confint(...)` bit for confidence interval.
+* Table 4 source is mentioned in table above. See `m6` object in this same `stats2.pdf` document and the `summary()` and `confint()` calls.
+* "...the estimates are quantitatively similar to the effects of pH and dry matter in ALFAM2 parameter set 2, where dry matter effects are about 14% per unit (%) change in dry matter, and 33% per unit pH change (comparing IDs 1, 2, 3, and 21 in Table A4.1 in Hafner et al. (2021))." is based on the results presented in the `preddat` data frame toward the bottom of `lit_raw_vs_dig/stats/stats2.pdf`. See `rcDM` column in row 3 for DM effect and `rcpH` row 4 for pH effect.
+* "A linear mixed-effect model was used to relate the change in emission (fraction of applied total ammoniacal nitrogen , from raw slurry to digestate) to changes in dry matter and pH. Correlation was not at all apparent, with confidence intervals of -6.0, 6.9% of applied TAN per unit pH and -3.3, 0.56% of applied TAN per % DM." is from `m11` in this same `stats2.pdf` document.
