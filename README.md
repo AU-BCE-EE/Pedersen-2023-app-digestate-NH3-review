@@ -45,7 +45,7 @@ This section give the source of tables, figures, etc. in the paper.
 | Figure 2  |  lit_raw_vs_dig/plots/DM_pH_effects.pdf   |    lit_raw_vs_dig/scripts/plot.R   |
 | Figure 3  |  lit_dig_treat/plots/treat_effect.pdf   |  lit_dig_treat/scripts/plot.R     |
 | Table 5, Romio et al., in preparation  |  dig_prop_data/data/digestate_comp.xlsx   |       |
-| Figure 4  |   emis_preds/plots/emis_pred  |  emis_preds/scripts/plot.R     |
+| Figure 4  |   emis_preds/plots/emis_pred.pdf  |  emis_preds/scripts/plot.R     |
 
 And the results given in the text:
 
