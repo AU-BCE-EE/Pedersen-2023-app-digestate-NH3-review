@@ -1,11 +1,17 @@
 # Pedersen-2023-app-digestate-NH3-review
-Data from literature review on NH3 emissions after field application of digestate and ALFAM2 model predictions, associated with research paper currently in progress. 
+Data from literature review and associated analysis on NH3 emissions after field application of digestate and ALFAM2 model predictions, associated with research paper currently in progress. 
 
 # Maintainer
 Johanna Pedersen. Contact information here: https://www.researchgate.net/profile/Johanna-Pedersen 
 
-# General for folders with R scripts
-See `scripts` for R scripts. `main.R` calls the other to do the complete dataload, subsetting, calculations, subsettings, plotting, saving of data (in `output` subdirectory) and plots (in `plots` subdirectory) etc.
+# Paper
+The following paper is associated with the material in this repository:
+
+*Add paper citation and link once published*
+
+# Repo overview for folders with R scripts
+See `scripts` for R scripts. 
+`main.R` calls the other to do the complete data loading, subsetting, calculations, plotting, saving of data (in `output` subdirectory) and plots (in `plots` subdirectory).
 
 # Directory structure 
 ## `dig_prop_data`
