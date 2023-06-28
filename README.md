@@ -39,7 +39,7 @@ This section give the source of tables, figures, etc. in the paper.
 | Counts in section 2.2.1 |                                  | lit_data/script/count.R    |
 |   Table 2       |  lit_data/output/lit_summ.xlsx           | lit_data/scripts/summ.R      |
 | pH and DM canges in 2.2.2 | lit_raw_vs_dig/stats/stats_simple.pdf  |  lit_raw_vs_dig/main.R   |
-| Table 3  | lit_raw_vs_dig/output/lit_summ.xlsx    |  lit_raw_vs_dig/scripts/export.R     |
+| Table 3  | lit_raw_vs_dig/output/lit_summ.csv    |  lit_raw_vs_dig/scripts/export.R     |
 | Figure 1  | lit_raw_vs_dig/plots/dig_effectA.pdf    |  lit_raw_vs_dig/scripts/plot.R     |
 | Table 4  |  `m6` in lit_raw_vs_dig/stats/stats2.pdf   |    lit_raw_vs_dig/main.R   |
 | Figure 2  |  lit_raw_vs_dig/plots/DM_pH_effects.pdf   |    lit_raw_vs_dig/scripts/plot.R   |
