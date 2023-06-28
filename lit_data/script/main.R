@@ -1,10 +1,8 @@
 
 rm(list = ls())
 
-dirname(rstudioapi::getActiveDocumentContext()$path)
-setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
-
 source('functions.R')
+rsswd(quiet = FALSE)
 source('packages.R')
 source('load.R')
 source('count.R')
