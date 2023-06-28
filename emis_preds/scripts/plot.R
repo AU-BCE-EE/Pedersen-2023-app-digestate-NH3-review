@@ -46,7 +46,7 @@ ggplot(dd, aes(app.timing.int, EFp, colour = man.source)) +
   ylim(0, NA) +
   theme_bw() +
   theme(legend.position = 'top')
-ggsave('../plots/emis_pred.png', height = 4, width = 6)
+ggsave2x('../plots/emis_pred', height = 4, width = 6)
 
 
 # Plot JP presentation 230224
