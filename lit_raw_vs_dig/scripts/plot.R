@@ -59,17 +59,29 @@ ggplot(dw, aes(emis.perc.ref, emis.perc.dig, colour = slurry.major.ref)) +
   xlim(8, 62) + ylim(8, 62)
 ggsave2x('../plots/dig_effectA', height = 3.8, width = 3.5)
 
-ggplot(dw, aes(emis.perc.ref, emis.perc.dig, colour = slurry.major.ref)) +
-  geom_abline(intercept = 0, slope = 0, linetype = 2) + 
-  geom_point(shape = 1, size = 6) +
-  geom_text(aes(label = source.ID), size = 3, show.legend = FALSE) +
-  geom_abline(intercept = 0, slope = 1, linetype = 2) +
-  scale_color_brewer(palette = "Set1") +
-  theme_bw() +
-  theme(legend.position = 'top') + 
-  labs(x = 'Raw EF (% of TAN)', y = 'Digestate EF (% of TAN)', shape = '', colour = '', lty = '') +
-  xlim(8, 62) + ylim(8, 62)
-ggsave2x('../plots/dig_effectB', height = 4.8, width = 4.5)
+# ggplot(dw, aes(emis.perc.ref, emis.perc.dig, colour = slurry.major.ref)) +
+#   geom_abline(intercept = 0, slope = 0, linetype = 2) + 
+#   geom_point(shape = 1, size = 6) +
+#   geom_text(aes(label = source.ID), size = 3, show.legend = FALSE) +
+#   geom_abline(intercept = 0, slope = 1, linetype = 2) +
+#   scale_color_brewer(palette = "Set1") +
+#   theme_bw() +
+#   theme(legend.position = 'top') + 
+#   labs(x = 'Raw EF (% of TAN)', y = 'Digestate EF (% of TAN)', shape = '', colour = '', lty = '') +
+#   xlim(8, 62) + ylim(8, 62)
+# ggsave2x('../plots/dig_effectB', height = 4.8, width = 4.5)
+
+# ggplot(dw, aes(emis.perc.ref, emis.perc.dig, colour = slurry.major.ref)) +
+#   geom_abline(intercept = 0, slope = 0, linetype = 2) + 
+#   geom_point(shape = 1, size = 6) +
+#   geom_text(aes(label = source.ID), size = 3, show.legend = FALSE) +
+#   geom_abline(intercept = 0, slope = 1, linetype = 2) +
+#   scale_color_brewer(palette = "Set1") +
+#   theme_bw() +
+#   theme(legend.position = 'top') + 
+#   labs(x = 'Raw EF (% of TAN)', y = 'Digestate EF (% of TAN)', shape = '', colour = '', lty = '') +
+#   xlim(8, 62) + ylim(8, 62)
+# ggsave2x('../plots/dig_effect_Ramiran', height = 3.3, width = 3)
 
 ggplot(dd, aes(DM, pH, shape = relDiff.frac.nm, colour = interaction(source, relDiff.set))) +
   geom_smooth(aes(group = interaction(source, relDiff.set)), method = lm, se = FALSE, linewidth = 0.5) +
@@ -81,15 +93,25 @@ ggplot(dd, aes(DM, pH, shape = relDiff.frac.nm, colour = interaction(source, rel
   guides(colour = 'none')
 ggsave2x('../plots/DM_pH_effects', height = 3.5, width = 3.2)
 
-ggplot(dd, aes(DM, pH, shape = relDiff.frac.nm, colour = interaction(source, relDiff.set))) +
-  geom_smooth(aes(group = interaction(source, relDiff.set)), method = lm, se = FALSE, linewidth = 0.5) +
-  scale_shape_manual(values = c(1, 17)) +
-  geom_point(size = 3) +
-  labs(x = 'DM (%)', y = 'pH', shape = '') +
-  theme_bw() +
-  theme(legend.position = 'top') +
-  guides(colour = 'none')
-ggsave2x('../plots/DM_pH_effectsB', height = 4.5, width = 4.2)
+# ggplot(dd, aes(DM, pH, shape = relDiff.frac.nm, colour = interaction(source, relDiff.set))) +
+#   geom_smooth(aes(group = interaction(source, relDiff.set)), method = lm, se = FALSE, linewidth = 0.5) +
+#   scale_shape_manual(values = c(1, 17)) +
+#   geom_point(size = 3) +
+#   labs(x = 'DM (%)', y = 'pH', shape = '') +
+#   theme_bw() +
+#   theme(legend.position = 'top') +
+#   guides(colour = 'none')
+# ggsave2x('../plots/DM_pH_effectsB', height = 4.5, width = 4.2)
+
+# ggplot(dd, aes(DM, pH, shape = relDiff.frac.nm, colour = interaction(source, relDiff.set))) +
+#   geom_smooth(aes(group = interaction(source, relDiff.set)), method = lm, se = FALSE, linewidth = 0.5) +
+#   scale_shape_manual(values = c(1, 17)) +
+#   geom_point(size = 3) +
+#   labs(x = 'DM (%)', y = 'pH', shape = '') +
+#   theme_bw() +
+#   theme(legend.position = 'top') +
+#   guides(colour = 'none')
+# ggsave2x('../plots/DM_pH_effects_Ramiran', height = 3.3, width = 3)
 
 ggplot(dw, aes((DM.dig - DM.ref), (pH.dig - pH.ref), colour = interaction(source, relDiff.set))) +
   geom_hline(yintercept = 0) +
