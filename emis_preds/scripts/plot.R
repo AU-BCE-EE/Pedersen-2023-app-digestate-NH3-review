@@ -107,7 +107,7 @@ ggplot(ddEF, aes(app.timing.int, EFp, colour = man.source)) +
                      labels= unique(dat$app.timing), limits = c(0.8, 6.1)) +
   ylim(0, 62) +
   theme(legend.position = 'top') +
-  scale_color_manual(values = c("#1B9E77", "#D95F02", "#7570B3"))
+  scale_color_manual(values = c("#E41A1C", "#377EB8", "#4DAF4A"))
 ggsave('../plots/emis_pred2_JP1.png', height = 4, width = 7)
 
 ggplot(dd[! dd$man.source == 'Afgasset C', ], aes(app.timing.int, EFp, colour = man.source)) +
