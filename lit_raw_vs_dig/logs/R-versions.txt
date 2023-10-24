@@ -16,19 +16,13 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
- [1] lme4_1.1-34      Matrix_1.5-4.1   gridExtra_2.3    openxlsx_4.2.5.2 reshape2_1.4.4   rmarkdown_2.24   ggplot2_3.4.3   
- [8] ALFAM2_3.7       readxl_1.4.3     devtools_2.4.5   usethis_2.2.2   
+[1] lme4_1.1-34      Matrix_1.5-4.1   rmarkdown_2.24   gridExtra_2.3    openxlsx_4.2.5.2 reshape2_1.4.4   readxl_1.4.3     ggplot2_3.4.3   
 
 loaded via a namespace (and not attached):
- [1] gtable_0.3.3      xfun_0.40         htmlwidgets_1.6.2 remotes_2.4.2.1   processx_3.8.2    lattice_0.21-8    callr_3.7.3      
- [8] vctrs_0.6.3       tools_4.3.1       ps_1.7.5          generics_0.1.3    curl_5.0.2        parallel_4.3.1    tibble_3.2.1     
-[15] fansi_1.0.4       highr_0.10        pkgconfig_2.0.3   desc_1.4.2        lifecycle_1.0.3   farver_2.1.1      compiler_4.3.1   
-[22] stringr_1.5.0     textshaping_0.3.6 munsell_0.5.0     tinytex_0.46      httpuv_1.6.11     htmltools_0.5.6   yaml_2.3.7       
-[29] nloptr_2.0.3      later_1.3.1       pillar_1.9.0      crayon_1.5.2      urlchecker_1.0.1  MASS_7.3-60       ellipsis_0.3.2   
-[36] cachem_1.0.8      sessioninfo_1.2.2 boot_1.3-28.1     nlme_3.1-162      mime_0.12         zip_2.3.0         tidyselect_1.2.0 
-[43] digest_0.6.33     stringi_1.7.12    dplyr_1.1.2       purrr_1.0.2       splines_4.3.1     labeling_0.4.2    rprojroot_2.0.3  
-[50] fastmap_1.1.1     grid_4.3.1        colorspace_2.1-0  cli_3.6.1         magrittr_2.0.3    pkgbuild_1.4.2    utf8_1.2.3       
-[57] withr_2.5.0       prettyunits_1.1.1 scales_1.2.1      promises_1.2.1    cellranger_1.1.0  ragg_1.2.5        memoise_2.0.1    
-[64] shiny_1.7.5       evaluate_0.21     knitr_1.43        miniUI_0.1.1.1    profvis_0.3.8     rlang_1.1.1       Rcpp_1.0.11      
-[71] xtable_1.8-4      glue_1.6.2        pkgload_1.3.2.1   minqa_1.2.5       rstudioapi_0.15.0 R6_2.5.1          plyr_1.8.8       
-[78] systemfonts_1.0.4 fs_1.6.3         
+ [1] gtable_0.3.3      dplyr_1.1.2       compiler_4.3.1    tidyselect_1.2.0  Rcpp_1.0.11       zip_2.3.0         stringr_1.5.0    
+ [8] splines_4.3.1     scales_1.2.1      boot_1.3-28.1     fastmap_1.1.1     lattice_0.21-8    R6_2.5.1          plyr_1.8.8       
+[15] generics_0.1.3    knitr_1.43        MASS_7.3-60       tibble_3.2.1      nloptr_2.0.3      munsell_0.5.0     minqa_1.2.5      
+[22] pillar_1.9.0      rlang_1.1.1       utf8_1.2.3        stringi_1.7.12    xfun_0.40         cli_3.6.1         withr_2.5.0      
+[29] magrittr_2.0.3    digest_0.6.33     grid_4.3.1        rstudioapi_0.15.0 nlme_3.1-162      lifecycle_1.0.3   vctrs_0.6.3      
+[36] evaluate_0.21     glue_1.6.2        cellranger_1.1.0  fansi_1.0.4       colorspace_2.1-0  tools_4.3.1       pkgconfig_2.0.3  
+[43] htmltools_0.5.6  
