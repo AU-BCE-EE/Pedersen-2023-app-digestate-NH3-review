@@ -7,7 +7,7 @@ Johanna Pedersen. Contact information here: https://www.researchgate.net/profile
 # Paper
 The following paper is associated with the material in this repository:
 
-*Add paper citation and link once published*
+Pedersen, J.P., Hafner, S.D. 2023. Ammonia emissions after field application of anaerobically digested animal slurry: Literature review and perspectives. Agriculture, Ecosystems & Environment 357: 108697. <https://doi.org/10.1016/j.agee.2023.108697> 
 
 # Repo overview for folders with R scripts
 See `scripts` for R scripts. 
