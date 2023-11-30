@@ -1,5 +1,5 @@
 # Pedersen-2023-app-digestate-NH3-review
-Data from literature review and associated analysis on NH3 emissions after field application of digestate and ALFAM2 model predictions, associated with research paper currently in progress. 
+Data from literature review and associated analysis on NH3 emissions after field application of digestate and ALFAM2 model predictions, associated with research paper: <https://doi.org/10.1016/j.agee.2023.108697> 
 
 # Maintainer
 Johanna Pedersen. Contact information here: https://www.researchgate.net/profile/Johanna-Pedersen 
